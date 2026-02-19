@@ -12,8 +12,29 @@ This repository contains an academic prototype that is capable of fuzzing the V8
 
 <br clear="right"/>
 
+## Citation
+If you use SbxBrk in your research, please cite our paper:
+```bibtex
+@inproceedings{10.1145/3719027.3765027,
+  author = {Bars, Nils and Bernhard, Lukas and Schloegel, Moritz and Holz, Thorsten},
+  title = {Empirical Security Analysis of Software-based Fault Isolation through Controlled Fault Injection},
+  year = {2025},
+  isbn = {9798400715259},
+  publisher = {Association for Computing Machinery},
+  address = {New York, NY, USA},
+  url = {https://doi.org/10.1145/3719027.3765027},
+  doi = {10.1145/3719027.3765027},
+  booktitle = {Proceedings of the 2025 ACM SIGSAC Conference on Computer and Communications Security},
+  pages = {2639–2652},
+  numpages = {14},
+  keywords = {browser security, fuzzing, software-based fault isolation},
+  location = {Taipei, Taiwan},
+  series = {CCS '25}
+}
+```
+
 # Setup
-The section describes all steps to set up the fuzzer. First, the Docker runtime environment must be built, followed by building the fuzzer and the target V8. Ensure that you follow this section top-down, as some components depend on others.
+This section describes all steps to set up the fuzzer. First, the Docker runtime environment must be built, followed by building the fuzzer and the target V8. Ensure that you follow this section top-down, as some components depend on others.
 
 ## Building the Runtime Environment
 Before preparing the runtime environment, this repository and all sub-repositories must be cloned:
@@ -28,9 +49,6 @@ git clone --recurse-submodules https://github.com/SbxBrk/SbxBrk.git
 > ```
 
 After cloning is finished, the environment can be built by executing `./env/build.sh`. This process will take some time. After it completes, you can use the `./env/start.sh` script to spawn the environment. See below for further details on the runtime's life cycle.
-
-> [!NOTE]
-> This is not required if downloaded from Zenodo.
 
 ### Managing the Runtime Environment Lifecycle
 After building or pulling a pre-built version of the runtime environment, the fuzzer is ready to use. The fuzzer's environment lifecycle is managed by a set of scripts located in the [`env`](./env/) folder.
@@ -47,7 +65,7 @@ Using [`start.sh`](./env/start.sh), an arbitrary number of shells can be spawned
 
 
 ## Building AFL++
-First, AFL++ must be built since it is used to compile V8. Noteably, this custom AFL++ version was needed during development to add support for LLVM 21. Current releases likely already support this version; however, this custom version is still provided to ensure the reproducibility of the results of this artifact.
+First, AFL++ must be built since it is used to compile V8. Notably, this custom AFL++ version was needed during development to add support for LLVM 21. Current releases likely already support this version; however, this custom version is still provided to ensure the reproducibility of the results of this artifact.
 For building AFL++, run the commands below:
 ```sh
 cd /work/AFLplusplus
@@ -81,7 +99,7 @@ cd /work/v8-build
 ./build.sh
 ```
 
-After the build finished, the V8 shell (named `d8`) is located at `/work/v8-build/out/fuzzing-build/d8`. Since the shell is linked against the fuzzer's runtime, the path to the shared object containing this runtime must be provided to run the shell. To test whether the shells work as intended, you may use the following commands:
+After the build finishes, the V8 shell (named `d8`) is located at `/work/v8-build/out/fuzzing-build/d8`. Since the shell is linked against the fuzzer's runtime, the path to the shared object containing this runtime must be provided to run the shell. To test whether the shells work as intended, you may use the following commands:
 ```sh
 # Make sure d8 finds the fuzzer's runtime.
 export LD_LIBRARY_PATH=/work/fuzzer/target/release
@@ -151,3 +169,4 @@ INPUT=<path-to-.ron-file> /work/v8-build/out/fuzzing-build/d8 --fuzzing --sandbo
 
 # Reproduction of the Paper's Results
 Please see [evaluation/README.md](https://github.com/SbxBrk/evaluation/blob/main/README.md) for detailed instructions. Ensure that you first build AFL++, SbxBrk (the fuzzer), V8, and FuzzilliSbx.
+
