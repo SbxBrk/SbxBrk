@@ -1,3 +1,5 @@
+<p><a href="https://mschloegel.me/paper/bars2025sbxbrk.pdf"><img alt="SbxBrk Paper" align="right" width="320" src="paper_preview.png"></a></p>
+
 # SbxBrk
 This repository contains an academic prototype that is capable of fuzzing the V8 heap sandbox.
 
@@ -15,7 +17,7 @@ The section describes all steps to set up the fuzzer. First, the Docker runtime 
 ## Building the Runtime Environment
 Before preparing the runtime environment, this repository and all sub-repositories must be cloned:
 ```
-git clone --recurse-submodules <TODO>
+git clone --recurse-submodules git@github.com:SbxBrk/SbxBrk.git
 ```
 
 After cloning is finished, the environment can be built by executing `./env/build.sh`. This process will take some time. After it completes, you can use the `./env/start.sh` script to spawn the environment. See below for further details on the runtime's life cycle.
