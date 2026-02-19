@@ -17,8 +17,14 @@ The section describes all steps to set up the fuzzer. First, the Docker runtime 
 ## Building the Runtime Environment
 Before preparing the runtime environment, this repository and all sub-repositories must be cloned:
 ```
-git clone --recurse-submodules git@github.com:SbxBrk/SbxBrk.git
+git clone --recurse-submodules https://github.com/SbxBrk/SbxBrk.git
 ```
+
+> [!TIP]
+> If you prefer using SSH for push access, you can configure git to rewrite HTTPS URLs to SSH locally:
+> ```
+> git config --local url."git@github.com:".insteadOf "https://github.com/"
+> ```
 
 After cloning is finished, the environment can be built by executing `./env/build.sh`. This process will take some time. After it completes, you can use the `./env/start.sh` script to spawn the environment. See below for further details on the runtime's life cycle.
 

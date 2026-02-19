@@ -43,6 +43,7 @@ fi
 touch "$PWD/data/bash_history"
 touch "$PWD/data/zsh_history"
 mkdir -p "$PWD/data/ccache"
+mkdir -p "$PWD/data/init.vim"
 mkdir -p "$PWD/data/vscode-data"
 
 log_success "[+] Creating new container..."
