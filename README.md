@@ -1,6 +1,7 @@
-<p><a href="https://mschloegel.me/paper/bars2025sbxbrk.pdf"><img alt="SbxBrk Paper" align="right" width="320" src="paper_preview.png"></a></p>
-
 # SbxBrk
+
+<a href="https://mschloegel.me/paper/bars2025sbxbrk.pdf"><img alt="SbxBrk Paper" align="right" width="320" src="paper_preview.png"></a>
+
 This repository contains an academic prototype that is capable of fuzzing the V8 heap sandbox.
 
 > [!WARNING]
@@ -9,7 +10,7 @@ This repository contains an academic prototype that is capable of fuzzing the V8
 > [!NOTE]
 > The project was developed on Ubuntu 24.04 on an x86_64 CPU using Docker as an abstraction from the underlying system. Running it on non-Linux systems or on different hardware platforms may not work as intended!
 
-
+<br clear="right"/>
 
 # Setup
 The section describes all steps to set up the fuzzer. First, the Docker runtime environment must be built, followed by building the fuzzer and the target V8. Ensure that you follow this section top-down, as some components depend on others.
@@ -39,7 +40,7 @@ After building or pulling a pre-built version of the runtime environment, the fu
 | [`./env/start.sh`](./env/start.sh)  | Spawn a new container or spawn a shell into an already running container. |
 | [`./env/stop.sh`](./env/stop.sh)  | This stops the container. Remember to call this after rebuilding the image. |
 
-Using [`start.sh`](./env/start.sh), an arbitrary number of shells can be spawned in the container. Using Visual Studio Code's [Containers](https://code.visualstudio.com/docs/remote/containers) extension allows you to work conveniently inside the Docker container.
+Using [`start.sh`](./env/start.sh), an arbitrary number of shells can be spawned in the container. Using Visual Studio Code's [Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers) extension allows you to work conveniently inside the Docker container.
 
 > [!NOTE]
 > Within the container, the root folder (containing this README.md file) is mounted as `/work`.
@@ -118,6 +119,14 @@ To test whether FuzzilliSbx works as intended, you may use the provided `./fuzzi
 
 
 # Running the Fuzzer
+
+## Prerequisites
+Before running the fuzzer, the following sysctl settings must be configured on the **host** (containers share the host kernel):
+```sh
+echo core | sudo tee /proc/sys/kernel/core_pattern
+echo 1 | sudo tee /proc/sys/kernel/shm_rmid_forced
+```
+
 Running the fuzzer is as simple as executing the command below:
 ```sh
 /work/fuzzer/target/release/v8fuzz fuzz \
@@ -141,4 +150,4 @@ INPUT=<path-to-.ron-file> /work/v8-build/out/fuzzing-build/d8 --fuzzing --sandbo
 ```
 
 # Reproduction of the Paper's Results
-Please see [evaluation/README.md](evaluation/README.md) for detailed instructions. Ensure that you first build AFL++, SbxBrk (the fuzzer), V8, and FuziiliSbx.
+Please see [evaluation/README.md](https://github.com/SbxBrk/evaluation/blob/main/README.md) for detailed instructions. Ensure that you first build AFL++, SbxBrk (the fuzzer), V8, and FuzzilliSbx.
