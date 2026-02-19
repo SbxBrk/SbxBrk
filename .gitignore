@@ -1,0 +1,4 @@
+v8-build/.gclient*
+v8-build/.gcs_entries
+v8-build/.cipd
+**/__pycache__/

@@ -1,0 +1,15 @@
+[submodule "AFLplusplus"]
+	path = AFLplusplus
+	url = git@github.com:SbxBrk/AFLplusplus.git
+[submodule "v8-build"]
+	path = v8-build
+	url = git@github.com:SbxBrk/V8.git
+[submodule "fuzzer"]
+	path = fuzzer
+	url = git@github.com:SbxBrk/fuzzer.git
+[submodule "FuzzilliSbx"]
+	path = FuzzilliSbx
+	url = git@github.com:SbxBrk/FuzzilliSbx.git
+[submodule "evaluation"]
+	path = evaluation
+	url = git@github.com:SbxBrk/evaluation.git
